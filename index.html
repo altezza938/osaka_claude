@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#11161e">
+<title>大阪 2026 · 家庭旅程手冊</title>
+<style>
+/* ================= Tokens ================= */
+:root{
+  --paper:#f2f4f7; --panel:#ffffff; --panel-2:#f8fafb;
+  --ink:#141922; --ink-2:#4e5a69; --ink-3:#8492a2;
+  --rule:#dfe4ea; --rule-2:#edf0f3;
+  --jr:#d9480f; --jr-tint:#fdede4; --jr-ink:#9c3a0c;
+  --rail:#1b4f72; --rail-tint:#e7eef5;
+  --ok:#12693a; --ok-tint:#e4f2e9;
+  --caution:#92400e; --caution-tint:#fbf0dc;
+  --lift:0 1px 1px rgba(20,25,34,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0d1117; --panel:#151b24; --panel-2:#111821;
+    --ink:#e6ebf2; --ink-2:#9aa8b8; --ink-3:#66768a;
+    --rule:#232d3a; --rule-2:#1b242f;
+    --jr:#ff8a3d; --jr-tint:#2b1a0e; --jr-ink:#ffa76b;
+    --rail:#7fb4da; --rail-tint:#10202e;
+    --ok:#5fd08a; --ok-tint:#0e2318;
+    --caution:#e8b45c; --caution-tint:#2a2011;
+    --lift:0 1px 1px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#f2f4f7; --panel:#ffffff; --panel-2:#f8fafb;
+  --ink:#141922; --ink-2:#4e5a69; --ink-3:#8492a2;
+  --rule:#dfe4ea; --rule-2:#edf0f3;
+  --jr:#d9480f; --jr-tint:#fdede4; --jr-ink:#9c3a0c;
+  --rail:#1b4f72; --rail-tint:#e7eef5;
+  --ok:#12693a; --ok-tint:#e4f2e9;
+  --caution:#92400e; --caution-tint:#fbf0dc;
+  --lift:0 1px 1px rgba(20,25,34,.04);
+}
+:root[data-theme="dark"]{
+  --paper:#0d1117; --panel:#151b24; --panel-2:#111821;
+  --ink:#e6ebf2; --ink-2:#9aa8b8; --ink-3:#66768a;
+  --rule:#232d3a; --rule-2:#1b242f;
+  --jr:#ff8a3d; --jr-tint:#2b1a0e; --jr-ink:#ffa76b;
+  --rail:#7fb4da; --rail-tint:#10202e;
+  --ok:#5fd08a; --ok-tint:#0e2318;
+  --caution:#e8b45c; --caution-tint:#2a2011;
+  --lift:0 1px 1px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang HK","PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+  padding-bottom:calc(74px + env(safe-area-inset-bottom));
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+:focus-visible{outline:2.5px solid var(--jr);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ================= Board header ================= */
+/* The board is a deliberate single-treatment element: always a dark plate,
+   like a station departure display, so its colours are fixed in both themes. */
+.board{
+  background:#11161e; color:#eef2f7;
+  padding:calc(18px + env(safe-area-inset-top)) 0 0;
+}
+.board .eyebrow{
+  font-size:11px;letter-spacing:.22em;color:var(--jr);font-weight:800;
+}
+.board h1{
+  margin:6px 0 3px;font-size:31px;line-height:1.15;font-weight:800;letter-spacing:.02em;
+  text-wrap:balance;
+}
+.board .when{margin:0;font-size:13px;color:#94a3b4;letter-spacing:.02em}
+.board .eyebrow{color:#ff8a3d}
+.status{
+  margin:16px 0 0;padding:13px 0;border-top:1px solid rgba(255,255,255,.11);
+  display:flex;align-items:baseline;gap:12px;
+}
+.status .figure{font-size:30px;font-weight:800;line-height:1;color:#ff8a3d;letter-spacing:-.01em}
+.status .lines{flex:1;min-width:0}
+.status .lines b{display:block;font-size:14px;font-weight:700;line-height:1.5;color:#eef2f7}
+.status .lines span{display:block;font-size:12.5px;color:#94a3b4;line-height:1.55}
+
+/* ================= Nav ================= */
+nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;
+  background:var(--panel);border-top:1px solid var(--rule);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+nav .row{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(7,1fr)}
+nav button{
+  appearance:none;background:none;border:0;cursor:pointer;padding:10px 2px 9px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  font:700 10px/1.2 inherit;color:var(--ink-3);white-space:nowrap;letter-spacing:-.02em;
+  border-top:2.5px solid transparent;margin-top:-1px;
+}
+nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{color:var(--jr);border-top-color:var(--jr)}
+
+/* ================= Structure ================= */
+main{padding-top:20px}
+section[hidden]{display:none}
+.stack{display:flex;flex-direction:column;gap:12px}
+h2{
+  font-size:11.5px;letter-spacing:.16em;color:var(--ink-3);font-weight:800;
+  margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule);
+}
+h2:first-child{margin-top:0}
+h3{font-size:17px;margin:0;font-weight:750;letter-spacing:.01em;text-wrap:balance}
+p{margin:0}
+.panel{
+  background:var(--panel);border:1px solid var(--rule);border-radius:12px;
+  padding:16px;box-shadow:var(--lift);
+}
+.tiny{font-size:12.5px;color:var(--ink-3);line-height:1.65}
+a{color:var(--rail);font-weight:650;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ================= Chips ================= */
+.chip{
+  display:inline-flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.06em;
+  padding:3px 9px;border-radius:4px;background:var(--jr-tint);color:var(--jr-ink);white-space:nowrap;
+}
+.chip.rail{background:var(--rail-tint);color:var(--rail)}
+.chip.live{background:var(--jr);color:#fff}
+
+/* ================= Departure board ================= */
+.dep{display:flex;flex-direction:column;gap:14px}
+.dep-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dep-top .tiny{margin-top:3px}
+.route{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:10px}
+.port .iata{font-size:27px;font-weight:800;letter-spacing:.02em;line-height:1}
+.port .clock{font-size:26px;font-weight:800;line-height:1.15;margin-top:2px;letter-spacing:-.01em}
+.port .where{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-top:4px}
+.port.arr{text-align:right}
+.span{display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:6px}
+.span .bar{width:52px;height:1.5px;background:var(--rule);position:relative}
+.span .bar::after{
+  content:"";position:absolute;right:-1px;top:-2.5px;
+  border-left:6px solid var(--jr);border-top:3px solid transparent;border-bottom:3px solid transparent;
+}
+.span .dur{font-size:10.5px;color:var(--ink-3);font-weight:700;white-space:nowrap}
+
+/* ================= Callouts (flat, no rails) ================= */
+.call{border-radius:10px;padding:12px 13px;font-size:14px;line-height:1.75;background:var(--caution-tint)}
+.call .lead{font-weight:800;color:var(--caution)}
+.call.rail{background:var(--rail-tint)}
+.call.rail .lead{color:var(--rail)}
+.call.ok{background:var(--ok-tint)}
+.call.ok .lead{color:var(--ok)}
+
+/* ================= Data rows ================= */
+dl{margin:0;display:flex;flex-direction:column}
+.row{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:10px 0;border-bottom:1px solid var(--rule-2);font-size:14.5px;
+}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row:first-child{padding-top:0}
+.row dt{color:var(--ink-2);flex:0 0 auto}
+.row dd{margin:0;text-align:right;font-weight:700;overflow-wrap:anywhere;display:flex;align-items:center;gap:8px;justify-content:flex-end}
+
+/* ================= Buttons ================= */
+.act{display:flex;flex-wrap:wrap;gap:8px}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;background:var(--jr);color:#fff;
+  border:0;border-radius:8px;padding:9px 14px;font:700 13.5px/1.4 inherit;cursor:pointer;text-decoration:none;
+}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn.line{background:transparent;color:var(--jr);border:1.5px solid var(--jr)}
+.btn.quiet{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.mini{
+  appearance:none;border:1px solid var(--rule);background:var(--panel-2);color:var(--ink);
+  border-radius:7px;padding:4px 10px;font:700 12px/1.5 inherit;cursor:pointer;white-space:nowrap;
+}
+.mini.done{border-color:var(--ok);color:var(--ok)}
+
+/* ================= Address plate ================= */
+.plate{background:var(--panel-2);border:1px solid var(--rule);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.plate .label{font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-weight:800}
+.plate .jp{font-size:20px;font-weight:750;line-height:1.6}
+.plate .gloss{font-size:12.5px;color:var(--ink-3);line-height:1.65}
+
+/* ================= Day timeline ================= */
+.day{display:flex;flex-direction:column}
+.day-btn{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;
+  background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px 15px;cursor:pointer;
+  box-shadow:var(--lift);
+}
+.day-btn[aria-expanded="true"]{border-radius:12px 12px 0 0;border-bottom-color:transparent}
+.dnum{
+  flex:0 0 auto;width:38px;height:38px;border-radius:8px;background:var(--jr-tint);color:var(--jr-ink);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;letter-spacing:.02em;
+}
+.day-btn[aria-expanded="true"] .dnum{background:var(--jr);color:#fff}
+.dtext{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.dtext b{font-size:16px;font-weight:750;line-height:1.45}
+.dtext span{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+.caret{flex:0 0 auto;color:var(--ink-3);transition:transform .18s}
+.caret svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.day-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.day-panel{
+  background:var(--panel);border:1px solid var(--rule);border-top:0;border-radius:0 0 12px 12px;
+  padding:2px 15px 14px;box-shadow:var(--lift);
+}
+.day-panel[hidden]{display:none}
+
+.stop{display:grid;grid-template-columns:52px 1fr;gap:13px;padding:14px 0;border-bottom:1px solid var(--rule-2)}
+.stop:last-child{border-bottom:0;padding-bottom:2px}
+.stop .at{font-size:13.5px;font-weight:800;color:var(--jr);padding-top:2px;letter-spacing:.01em}
+.body{display:flex;flex-direction:column;gap:7px;min-width:0}
+.body b{font-size:15.5px;font-weight:750;line-height:1.5}
+.body p{font-size:14px;color:var(--ink-2);line-height:1.75}
+.meal{background:var(--ok-tint);border-radius:9px;padding:10px 12px;font-size:13.5px;line-height:1.7;display:flex;flex-direction:column;gap:5px}
+.meal .tag{font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--ok)}
+
+ul{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink-2);line-height:1.8;display:flex;flex-direction:column;gap:7px}
+ul b{color:var(--ink);font-weight:750}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--panel-2);border:1px solid var(--rule);border-radius:10px;padding:12px}
+.stat .k{font-size:11px;letter-spacing:.1em;color:var(--ink-3);font-weight:800}
+.stat .v{font-size:19px;font-weight:800;margin-top:5px;letter-spacing:-.01em}
+.stat .v small{font-size:12px;font-weight:650;color:var(--ink-2);letter-spacing:0}
+
+.contact{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule-2)}
+.contact:last-child{border-bottom:0;padding-bottom:0}
+.contact b{display:block;font-size:15px;font-weight:750}
+.contact span{font-size:12.5px;color:var(--ink-3)}
+
+.phrase{background:var(--panel-2);border:1px solid var(--rule);border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:6px}
+.phrase .ja{font-size:19px;font-weight:700;line-height:1.6}
+.phrase .zh{font-size:13px;color:var(--ink-3);line-height:1.7}
+
+/* ================= Plan switcher ================= */
+.seg{
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px;
+  background:var(--panel-2);border:1px solid var(--rule);border-radius:11px;padding:4px;
+}
+.seg button{
+  appearance:none;border:0;background:none;border-radius:8px;padding:10px 8px;cursor:pointer;
+  font:750 13.5px/1.4 inherit;color:var(--ink-2);
+}
+.seg button[aria-selected="true"]{background:var(--jr);color:#fff}
+.why{display:flex;flex-direction:column;gap:9px}
+.why .item{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:13.5px;line-height:1.7}
+.why .mark{
+  width:19px;height:19px;border-radius:50%;background:var(--jr-tint);color:var(--jr-ink);
+  font:800 11px/19px inherit;text-align:center;flex:0 0 auto;margin-top:3px;
+}
+
+/* ================= Tour book gallery ================= */
+.shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:520px){.shelf{grid-template-columns:repeat(3,1fr)}}
+.leaf{
+  position:relative;appearance:none;padding:0;cursor:pointer;
+  background:var(--panel-2);border:1px solid var(--rule);border-radius:10px;overflow:hidden;
+  aspect-ratio:3/4;display:block;
+}
+.leaf img{width:100%;height:100%;object-fit:cover;display:block}
+.leaf .no{
+  position:absolute;left:6px;bottom:6px;background:rgba(17,22,30,.82);color:#fff;
+  font:800 11px/1 inherit;padding:4px 7px;border-radius:4px;letter-spacing:.04em;
+}
+.leaf .cap{
+  position:absolute;right:6px;bottom:6px;background:var(--jr);color:#fff;
+  font:800 10px/1 inherit;padding:4px 7px;border-radius:4px;
+}
+
+.empty{
+  border:1.5px dashed var(--rule);border-radius:12px;padding:26px 18px;text-align:center;
+  display:flex;flex-direction:column;gap:8px;align-items:center;color:var(--ink-3);
+}
+.empty svg{width:34px;height:34px;stroke:var(--ink-3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.empty b{color:var(--ink);font-size:15px;font-weight:750}
+.empty span{font-size:13px;line-height:1.7;max-width:34ch}
+
+/* Lightbox */
+.lb{
+  position:fixed;inset:0;z-index:200;background:#0a0e14;
+  display:flex;flex-direction:column;
+}
+.lb[hidden]{display:none}
+.lb-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:calc(10px + env(safe-area-inset-top)) 14px 10px;color:#eef2f7;flex:0 0 auto;
+}
+.lb-bar .count{font:800 13px/1 inherit;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.lb-x{
+  appearance:none;background:rgba(255,255,255,.12);border:0;color:#eef2f7;
+  width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.lb-x svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round}
+.lb-stage{
+  flex:1;min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;
+  padding:0 8px;touch-action:pinch-zoom;-webkit-overflow-scrolling:touch;
+}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.lb-nav{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:12px 14px calc(14px + env(safe-area-inset-bottom));flex:0 0 auto;
+}
+.lb-nav button{
+  appearance:none;background:rgba(255,255,255,.12);border:0;color:#eef2f7;cursor:pointer;
+  border-radius:9px;padding:11px 20px;font:700 14px/1 inherit;
+}
+.lb-nav button:disabled{opacity:.3;cursor:default}
+.lb-cap{color:#94a3b4;font-size:12.5px;text-align:center;padding:0 16px 6px;line-height:1.6}
+
+footer{padding:28px 0 36px;text-align:center}
+</style>
+</head>
+<body>
+
+
+<div class="board">
+  <div class="wrap">
+    <div class="eyebrow">5日4夜 · 8人同行</div>
+    <h1>大阪 · 京都</h1>
+    <p class="when num">2026年8月5日（三）— 8月9日（日）</p>
+    <div class="status">
+      <div class="figure num" id="figure">—</div>
+      <div class="lines"><b id="statusB">載入中</b><span id="statusS"></span></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ===== 今日 ===== -->
+<section id="p-today">
+  <div id="todayBox" class="stack"></div>
+
+  <h2>行程概覽</h2>
+  <div class="panel">
+    <dl>
+      <div class="row"><dt>去程</dt><dd class="num">HX616 · 8月5日 02:50</dd></div>
+      <div class="row"><dt>回程</dt><dd class="num">UO689 · 8月9日 20:40</dd></div>
+      <div class="row"><dt>住宿</dt><dd>生野區桃谷 Airbnb</dd></div>
+      <div class="row"><dt>租車</dt><dd>Toyota Vellfire · 8座位</dd></div>
+      <div class="row"><dt>人數</dt><dd>7位成人 + 1位嬰兒</dd></div>
+    </dl>
+  </div>
+
+  <h2>特別提醒</h2>
+  <div class="stack">
+    <div class="call"><span class="lead">凌晨機，容易記錯日子。</span>航班是 8月5日（三）02:50 起飛，即是說 <b>8月4日（二）晚上</b>就要去到香港機場第2客運大樓，大約 23:50。</div>
+    <div class="call"><span class="lead">回程行李額較少。</span>去程每人可寄艙 23 公斤，回程<b>每人只有 20 公斤</b>，而且沒有獨立手提行李額。臨空城掃完貨之後記得重新磅過。</div>
+    <div class="call rail"><span class="lead">嬰兒。</span>嬰兒車來回都免費。去程有 23 公斤寄艙行李，但<b>回程沒有免費寄艙行李額</b>。</div>
+  </div>
+</section>
+
+<!-- ===== 航班 ===== -->
+<section id="p-fly" hidden>
+  <h2>去程 · 2026年8月5日（三）</h2>
+  <div class="panel dep">
+    <div class="dep-top">
+      <div>
+        <h3>HX616 · 香港航空</h3>
+        <div class="tiny">空中巴士 A320 · 經濟艙 · 提供小食</div>
+      </div>
+      <span class="chip">第1日</span>
+    </div>
+    <div class="route">
+      <div class="port">
+        <div class="iata">HKG</div>
+        <div class="clock num">02:50</div>
+        <div class="where">香港國際機場<br>第2客運大樓</div>
+      </div>
+      <div class="span"><div class="bar"></div><div class="dur num">5小時05分</div></div>
+      <div class="port arr">
+        <div class="iata">KIX</div>
+        <div class="clock num">07:55</div>
+        <div class="where">關西國際機場<br>第1客運大樓</div>
+      </div>
+    </div>
+    <div class="call"><span class="lead">8月4日（二）23:50 前到達機場。</span>Trip.com 建議起飛前 3 小時到達；8人同行又有寄艙行李，不宜計得太盡。</div>
+    <div class="act">
+      <a class="btn line" href="https://www.hongkongairlines.com/" target="_blank" rel="noopener">香港航空網上登機</a>
+      <a class="btn quiet" href="https://www.google.com/search?q=HX616+flight+status" target="_blank" rel="noopener">查航班狀態</a>
+    </div>
+  </div>
+
+  <h2>回程 · 2026年8月9日（日）</h2>
+  <div class="panel dep">
+    <div class="dep-top">
+      <div>
+        <h3>UO689 · 香港快運</h3>
+        <div class="tiny">空中巴士 A321 · 經濟艙 · 不包餐食</div>
+      </div>
+      <span class="chip rail">第5日</span>
+    </div>
+    <div class="route">
+      <div class="port">
+        <div class="iata">KIX</div>
+        <div class="clock num">20:40</div>
+        <div class="where">關西國際機場<br>第1客運大樓</div>
+      </div>
+      <div class="span"><div class="bar"></div><div class="dur num">3小時10分</div></div>
+      <div class="port arr">
+        <div class="iata">HKG</div>
+        <div class="clock num">23:50</div>
+        <div class="where">香港國際機場<br>第1客運大樓</div>
+      </div>
+    </div>
+    <div class="call"><span class="lead">17:00 喺臨空城還車，再搭一個站入機場。</span>還車點唔喺機場，係臨空town站前；還完車搭 JR 或南海線 6–9 分鐘入到第1客運大樓，大約 17:40 到。機上不包餐食，登機前先吃飽。</div>
+    <div class="act">
+      <a class="btn line" href="https://www.hkexpress.com/" target="_blank" rel="noopener">香港快運網上登機</a>
+      <a class="btn quiet" href="https://www.google.com/search?q=UO689+flight+status" target="_blank" rel="noopener">查航班狀態</a>
+    </div>
+  </div>
+
+  <h2>登機安排</h2>
+  <div class="panel stack">
+    <div class="call rail"><span class="lead">兩程要分開辦理網上登機。</span>這是套票，去程同回程分屬兩間航空公司。去程用香港航空網站，回程用香港快運網站。訂位編號問 Raymond 拿。</div>
+  </div>
+
+  <h2>行李限額</h2>
+  <div class="panel stack">
+    <div class="duo">
+      <div class="stat"><div class="k">香港 → 大阪</div><div class="v num">23 公斤 <small>每人寄艙</small></div></div>
+      <div class="stat"><div class="k">大阪 → 香港</div><div class="v num">20 公斤 <small>每人寄艙</small></div></div>
+    </div>
+    <ul>
+      <li><b>去程手提：</b>1件隨身物品（40×30×15 厘米）+ 1件手提行李（56×36×23 厘米），<b>合共不超過 7 公斤</b>。</li>
+      <li><b>回程手提：</b>只有 1 件隨身物品（40×25×20 厘米），7 公斤，<b>沒有獨立手提行李額</b>。</li>
+      <li><b>寄艙尺寸：</b>來回程均為長闊高總和 158 厘米以內。</li>
+      <li><b>嬰兒：</b>去程可寄艙 23 公斤（115 厘米以內），回程沒有免費寄艙額。嬰兒車來回免費——手提上機 7 公斤，寄艙 32 公斤。</li>
+    </ul>
+    <div class="call"><span class="lead">最緊要留意回程：</span>每人少 3 公斤，而且沒有手提行李額。出發去臨空城之前，先在民宿磅好、分配好，不要等到櫃檯先發現超重。</div>
+  </div>
+
+  <h2>出發前</h2>
+  <div class="panel stack">
+    <div class="call"><span class="lead">護照要有效期 6 個月以上。</span>機票上的英文姓名必須與護照完全一致，如有不符可能被拒絕登機。</div>
+  </div>
+</section>
+
+<!-- ===== 住宿 ===== -->
+<section id="p-stay" hidden>
+  <h2>Airbnb · 4晚</h2>
+  <div class="panel stack">
+    <div>
+      <h3>JR桃谷駅徒歩7分／4LDK／4寝室</h3>
+      <div class="tiny">整棟房屋 · 4間睡房 · 7張床 · 可住 7人 + 嬰兒</div>
+    </div>
+    <div class="plate">
+      <div class="label">給的士司機看</div>
+      <div class="jp">〒544-0034<br>大阪府大阪市生野区桃谷2丁目13-11</div>
+      <div class="gloss">白色三層獨立屋，門口有 Airbnb 標誌。</div>
+      <div class="act">
+        <a class="btn" id="navHome" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>導航去民宿</a>
+        <button class="mini" data-copy="〒544-0034 大阪府大阪市生野区桃谷2丁目13-11">複製地址</button>
+      </div>
+    </div>
+    <dl>
+      <div class="row"><dt>入住</dt><dd class="num">8月5日（三）16:00 後</dd></div>
+      <div class="row"><dt>退房</dt><dd class="num">8月9日（日）10:00 前</dd></div>
+      <div class="row"><dt>入屋方式</dt><dd>自助入住 · 鎖匙箱</dd></div>
+      <div class="row"><dt>房型</dt><dd>整棟 4 房 · 7 張床</dd></div>
+    </dl>
+    <div class="call rail"><span class="lead">07:55 落機，但 16:00 才可入住。</span>房東容許 11:00 後先放行李，但<b>必須事先聯絡</b>。退房後不設延遲退房，亦不設行李寄存。</div>
+  </div>
+
+  <h2>前往方法</h2>
+  <div class="panel stack">
+    <ul>
+      <li><b>自駕（原定安排）：</b>由臨空城取車點約 60–70 分鐘。請跟足房東相片指示的路線——其他路太窄，8座位大車入不到。</li>
+      <li><b>坐車（後備）：</b>關西機場乘南海線特急 → <b>新今宮站</b>下車 → 轉 JR 環狀線（內回）→ <b>桃谷站</b> → 步行 7 分鐘。全程約 70 分鐘。</li>
+      <li><b>最近車站：</b>桃谷站南出口步行 7 分鐘（JR 環狀線）· 鶴橋站步行 10 分鐘（大阪地鐵及近鐵）。</li>
+    </ul>
+    <div class="act">
+      <a class="btn line" id="navKixHome" href="#" target="_blank" rel="noopener">關西機場 → 民宿路線</a>
+      <a class="btn quiet" href="https://maps.app.goo.gl/MW2JQMZeYfCSugqQA?g_st=ic" target="_blank" rel="noopener">房東地圖連結</a>
+    </div>
+    <div class="act">
+      <a class="btn quiet" href="https://youtu.be/2YBHD0Zfcw4?si=CHcaJfVWBjbHdIUf" target="_blank" rel="noopener">車站步行路線影片</a>
+      <a class="btn quiet" href="https://drive.google.com/file/d/1HQ5Ts0Jt9ew35bvjyNrwDu0MZBSOHaS7/view?usp=sharing" target="_blank" rel="noopener">入屋指示</a>
+    </div>
+  </div>
+
+  <h2>屋規</h2>
+  <div class="panel stack">
+    <ul>
+      <li><b>安靜時段 22:00–07:00</b>，室內室外都要保持安靜。這是住宅區。</li>
+      <li>最多 12 人 · 不可攜帶寵物。</li>
+      <li>外出時請隨身攜帶鎖匙。</li>
+      <li>室內垃圾桶滿了，請將垃圾袋放入<b>車庫的垃圾桶</b>，垃圾車每兩日收一次。</li>
+      <li>退房時，請將鎖匙<b>放回鎖匙箱</b>。</li>
+    </ul>
+    <div class="call"><span class="lead">鎖匙罰款：</span>遺失 ¥20,000 · 沒有放回指定位置 ¥10,000 · 退房後才歸還 ¥10,000。</div>
+  </div>
+
+  <h2>房東</h2>
+  <div class="panel stack">
+    <div class="contact">
+      <div><b>Jumpei K</b><span>房東 · 可用日文或英文溝通</span></div>
+      <a class="btn line" href="https://www.airbnb.com.hk/trips" target="_blank" rel="noopener">Airbnb 訊息</a>
+    </div>
+    <p class="tiny">請用 Airbnb App 內的訊息聯絡房東。萬一入不到屋又急需要，房東的電話號碼在 Raymond 手機裡。</p>
+  </div>
+</section>
+
+<!-- ===== 行程 ===== -->
+<section id="p-plan" hidden>
+  <h2>每日行程</h2>
+  <div class="seg" id="seg">
+    <button data-plan="orig" aria-selected="true">原定行程</button>
+    <button data-plan="alt">建議行程</button>
+  </div>
+  <div id="planNote"></div>
+  <div class="stack" id="days"></div>
+  <div class="call rail" style="margin-top:12px"><span class="lead">每個景點都有「路線」掣。</span>㩒一下會直接開啟 Google 地圖導航，手機會跳去地圖 App。</div>
+
+  <h2>晚餐推薦 · 全部有停車場</h2>
+  <div class="stack">
+
+    <div class="panel stack">
+      <div class="dep-top">
+        <div><h3>しゃぶ葉</h3><div class="tiny">涮涮鍋・火鍋放題</div></div>
+        <span class="chip">放題</span>
+      </div>
+      <p class="tiny">Skylark 集團旗下，涮涮鍋食到飽，仲有蔬菜吧、雪糕同飲品吧任裝。大人約 ¥2,500–3,500，小朋友有兒童價，3 歲以下多數免費。郊區分店係獨立平房，自帶免費平地停車場，8 人車泊得好舒服。長輩食得清淡，細路自己涮自己食，最啱一家大細。</p>
+      <div class="act"><a class="btn quiet" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%97%E3%82%83%E3%81%B6%E8%91%89%20%E5%A4%A7%E9%98%AA%20%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener">搵附近分店</a></div>
+    </div>
+
+    <div class="panel stack">
+      <div class="dep-top">
+        <div><h3>焼肉きんぐ</h3><div class="tiny">燒肉放題・有和牛選項</div></div>
+        <span class="chip">放題</span>
+      </div>
+      <p class="tiny">燒肉食到飽，用枱上平板落單，唔使起身攞。大人約 ¥3,300–4,500，上一級套餐就有和牛。想食和牛又唔想捱貴價，呢間性價比最高。同樣係郊區路邊店為主，免費停車場夠大。細路有專屬餐牌同雪糕。</p>
+      <div class="act"><a class="btn quiet" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%84%BC%E8%82%89%E3%81%8D%E3%82%93%E3%81%90%20%E5%A4%A7%E9%98%AA%20%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener">搵附近分店</a></div>
+    </div>
+
+    <div class="panel stack">
+      <div class="dep-top">
+        <div><h3>壽司放題</h3><div class="tiny">かっぱ寿司 食べ放題</div></div>
+        <span class="chip warn">要預約</span>
+      </div>
+      <p class="tiny">かっぱ寿司 有壽司食到飽，約 ¥2,500–3,500。但<b>唔係間間分店都做，而且多數要網上預約</b>，去之前一定要確認。如果訂唔到，郊區嘅 スシロー 或 くら寿司 路邊店一樣係大停車場、平、細路啱食，只係按碟計唔係放題。</p>
+      <div class="act">
+        <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8B%E3%81%A3%E3%81%B1%E5%AF%BF%E5%8F%B8%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">かっぱ寿司</a>
+        <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B9%E3%82%B7%E3%83%AD%E3%83%BC%20%E5%A4%A7%E9%98%AA%20%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener">スシロー</a>
+      </div>
+    </div>
+
+    <div class="call"><span class="lead">Vellfire 車高約 1.95 米，泊車前睇清楚。</span>好多市區立體／機械式停車場限高 1.55 米，入唔到。要搵<b>平面</b>或<b>自走式</b>停車場，高度限制 2.1 米以上。以上三間都係郊區路邊店，自己有平地停車場，唔會有呢個問題——市中心先要小心。</div>
+
+    <div class="call rail"><span class="lead">點揀分店？</span>㩒「搵附近分店」會用你當時嘅位置搵最近嘅一間。挑<b>離市中心遠少少</b>嘅，車位多啲、人少啲、又通常唔使等位。8 個人建議打電話或用網上預約，日本放題店夜晚好多時要等。</div>
+  </div>
+</section>
+
+<!-- ===== 票券 ===== -->
+<section id="p-tix" hidden>
+  <h2>日本環球影城</h2>
+  <div class="panel stack">
+    <div class="dep-top">
+      <div>
+        <h3>USJ · 8月6日（四）</h3>
+        <div class="tiny">經 KKday 預訂</div>
+      </div>
+      <span class="chip">第2日</span>
+    </div>
+    <dl>
+      <div class="row"><dt>入場券</dt><dd>6張成人 + 1張兒童</dd></div>
+      <div class="row"><dt>快速通關券</dt><dd>3張 Express Pass 4</dd></div>
+      <div class="row"><dt>入場日期</dt><dd class="num">2026年8月6日</dd></div>
+    </dl>
+    <div class="call"><span class="lead">憑證分成兩封電郵寄出。</span>因為票數較多，KKday 分了兩封信，實體憑證由 Raymond 保管。出發前記得兩封都下載或截圖，離線都看得到。</div>
+    <div class="call rail"><span class="lead">7 位成人只有 3 張快速通關券。</span>出發前先分配好邊個用。玩大型機動遊戲時向職員說 <b>Child Switch</b>，兩批人可以輪流玩，不需重新排隊，BB 全程有人照顧。</div>
+    <div class="act">
+      <a class="btn line" id="navUsj" href="#" target="_blank" rel="noopener">導航去 USJ</a>
+      <a class="btn quiet" href="https://www.usj.co.jp/web/zh/tw" target="_blank" rel="noopener">USJ 官網</a>
+      <a class="btn quiet" href="https://www.kkday.com/zh-hk/user/orders" target="_blank" rel="noopener">KKday 訂單</a>
+    </div>
+  </div>
+
+  <h2>租車</h2>
+  <div class="panel stack">
+    <div>
+      <h3>Toyota Vellfire · 8座位（禁煙車）</h3>
+      <div class="tiny">NICONICO Rent a Car · 經 Tabirai 預訂</div>
+    </div>
+    <dl>
+      <div class="row"><dt>取車</dt><dd class="num">8月5日（三）10:00</dd></div>
+      <div class="row"><dt>還車</dt><dd class="num">8月9日（日）17:00</dd></div>
+      <div class="row"><dt>取還車地點</dt><dd>臨空城站前店<br><span class="tiny">關西空港りんくうタウン駅店</span></dd></div>
+      <div class="row"><dt>已包</dt><dd>CDW 保險 · 車用導航<br>ETC 卡 · 兒童安全座椅</dd></div>
+      <div class="row"><dt>總金額</dt><dd class="num">¥80,980</dd></div>
+    </dl>
+    <div class="call rail"><span class="lead">取還車安排：Raymond 自己去，家人喺機場等。</span><b>去程</b>——落機後家人喺第1客運大樓等，Raymond 搭一個站去臨空城取車，10:25 揸返嚟機場接人。<b>回程</b>——先喺機場落客區放低家人同所有行李，Raymond 自己揸去還車，再搭一個站返機場會合。長輩同 BB 全程唔使拖住行李搭車。</div>
+    <div class="call"><span class="lead">跨海橋要俾過路費。</span>機場同臨空城之間隔住跨海大橋，每次過都收費。已經租咗 ETC 卡，插好就自動扣，唔使停低俾錢。</div>
+    <div class="call"><span class="lead">只收信用卡，唔收現金。</span>店舖要求用信用卡付款（VISA／Master／JCB／AMEX／Diners）。另外要帶齊<b>香港駕駛執照 + 國際駕駛許可證</b>（1949年日內瓦公約），兩樣缺一不可。預訂編號問 Raymond 拿。</div>
+    <div class="act">
+      <a class="btn line" id="navRinku" href="#" target="_blank" rel="noopener">導航去取車點</a>
+      <a class="btn quiet" href="tel:+81724299085">致電門市 072-429-9085</a>
+    </div>
+  </div>
+
+  <h2>值得考慮</h2>
+  <div class="panel">
+    <ul>
+      <li><b>大阪周遊卡</b>——地鐵無限次乘搭，另可免費進入多個景點，適合心齋橋同大阪城那兩日。</li>
+      <li><b>關西一通（Kansai One Pass）</b>——房東的建議，如果會來往大阪、神戶、京都、奈良就值得考慮。<a href="https://kansaionepass.com/kf_pr/kf_pr_jp.html" target="_blank" rel="noopener">詳情</a></li>
+      <li>由於全程都有租車，只有刻意不揸車的日子（第1日同第3日）買車票先划算。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 資訊 ===== -->
+<section id="p-info" hidden>
+  <h2>緊急聯絡</h2>
+  <div class="panel">
+    <div class="contact">
+      <div><b>警察</b><span>日本 · 任何電話均可免費撥打</span></div>
+      <a class="btn" href="tel:110">110</a>
+    </div>
+    <div class="contact">
+      <div><b>火警 · 救護車</b><span>日本 · 救急車 kyūkyūsha</span></div>
+      <a class="btn" href="tel:119">119</a>
+    </div>
+    <div class="contact">
+      <div><b>Jumpei K</b><span>Airbnb 房東 · 用 App 訊息聯絡</span></div>
+      <a class="btn line" href="https://www.airbnb.com.hk/trips" target="_blank" rel="noopener">開 Airbnb</a>
+    </div>
+  </div>
+
+  <h2>實用日語</h2>
+  <div class="panel stack">
+    <div class="phrase"><div class="ja">この住所までお願いします。</div><div class="zh">「請載我到這個地址。」配合「住宿」頁的地址一齊給司機看。</div></div>
+    <div class="phrase"><div class="ja">英語のメニューはありますか？</div><div class="zh">「請問有英文餐牌嗎？」</div></div>
+    <div class="phrase"><div class="ja">8人です。個室はありますか？</div><div class="zh">「我們 8 位。請問有包廂嗎？」一家人加埋嬰兒車時好用。</div></div>
+    <div class="phrase"><div class="ja">ベビーカーで入れますか？</div><div class="zh">「可以推嬰兒車進去嗎？」</div></div>
+    <div class="phrase"><div class="ja">助けてください。救急車を呼んでください。</div><div class="zh">「請幫幫我，請叫救護車。」</div></div>
+  </div>
+
+  <h2>實用貼士</h2>
+  <div class="panel stack">
+    <ul>
+      <li><b>要帶現金。</b>小餐廳、神社同停車場收費機好多時只收現金。7-Eleven 的櫃員機可以用海外提款卡。</li>
+      <li><b>過路費。</b>取車時向櫃檯要一張 ETC 卡；按這個行程，阪神同京都的高速公路一定會用到。</li>
+      <li><b>泊車車高限制。</b>Vellfire 高約 1.95 米。市區好多立體或機械式停車場限高 1.55 米，入唔到。要認住揀<b>平面</b>或<b>自走式</b>停車場（高度限制 2.1 米以上），大型商場同郊區路邊店通常冇問題。</li>
+      <li><b>全程自駕。</b>行程已經改成全部揸車，唔使坐 JR 或地鐵。唯一兩程要坐車嘅係關西機場 ↔ 臨空城取／還車點，只係一個站。</li>
+      <li><b>8月的大阪非常熱。</b>三十幾度加高濕度。中午盡量安排室內活動，記得為長輩同 BB 帶水。</li>
+      <li><b>日本的自來水可以直接飲用。</b></li>
+    </ul>
+    <div class="act">
+      <a class="btn quiet" href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&amp;area_code=270000" target="_blank" rel="noopener">大阪天氣預報</a>
+      <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&amp;query=7-Eleven%20ATM%20%E6%A1%83%E8%B0%B7" target="_blank" rel="noopener">附近 7-Eleven</a>
+    </div>
+  </div>
+
+  <div class="call ok"><span class="lead">此頁不載任何訂位編號或個人資料。</span>所有訂單編號、乘客姓名同出生日期都不在這裡，由 Raymond 保管。萬一連結流出，最多只是行程曝光。</div>
+</section>
+
+<!-- ===== 旅遊書 ===== -->
+<section id="p-book" hidden>
+  <h2>旅遊書</h2>
+  <div id="shelf"></div>
+</section>
+
+<footer class="tiny">大阪 2026 · 家庭旅程手冊</footer>
+</main>
+
+<nav>
+  <div class="row">
+    <button data-tab="today" aria-selected="true">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>今日</button>
+    <button data-tab="fly">
+      <svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5a2.1 2.1 0 00-3-3L13 8 4.8 6.2a1 1 0 00-1 1.6L8 11l-3 3H3l-1 2 3.5 1L5 21l2-1v-2l3-3 3.2 4.2a1 1 0 001.6-1z"/></svg>航班</button>
+    <button data-tab="stay">
+      <svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/></svg>住宿</button>
+    <button data-tab="plan">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>行程</button>
+    <button data-tab="tix">
+      <svg viewBox="0 0 24 24"><path d="M3 9a3 3 0 000 6v3a2 2 0 002 2h14a2 2 0 002-2v-3a3 3 0 000-6V6a2 2 0 00-2-2H5a2 2 0 00-2 2z"/><path d="M13 5v14" stroke-dasharray="2 3"/></svg>票券</button>
+    <button data-tab="book">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 012-2h13v18H6a2 2 0 01-2-1.5z"/><path d="M4 19.5A2 2 0 016 18h13"/></svg>旅遊書</button>
+    <button data-tab="info">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>資訊</button>
+  </div>
+</nav>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="旅遊書內頁">
+  <div class="lb-bar">
+    <span class="count" id="lbCount"></span>
+    <button class="lb-x" id="lbClose" aria-label="關閉">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="lb-stage" id="lbStage"></div>
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-nav">
+    <button id="lbPrev">← 上一頁</button>
+    <button id="lbNext">下一頁 →</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- Google Maps deep links ---------- */
+var HOME = "〒544-0034 大阪府大阪市生野区桃谷2丁目13-11";
+function dir(dest, origin){
+  var u = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
+  if (origin) u += "&origin=" + encodeURIComponent(origin);
+  return u;
+}
+function find(q){
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+}
+
+document.getElementById("navHome").href    = dir(HOME);
+document.getElementById("navKixHome").href = dir(HOME, "関西国際空港");
+document.getElementById("navUsj").href     = dir("ユニバーサル・スタジオ・ジャパン");
+document.getElementById("navRinku").href   = dir("ニコニコレンタカー りんくうタウン駅前店");
+
+/* ---------- 行程資料 ---------- */
+var DAYS = [
+  {
+    n:1, date:"2026-08-05", label:"8月5日（三）", title:"抵達 · 心齋橋",
+    sub:"關西機場 → 民宿 → 心齋橋 → 梅田",
+    stops:[
+      { at:"02:50", t:"乘 HX616 由香港機場第2客運大樓出發",
+        p:"星期三凌晨的班機——即是星期二晚上就要出門。" },
+      { at:"07:55", t:"抵達關西機場第1客運大樓",
+        p:"過關、取行李。一家人喺入境大堂等，唔使拖住行李搭車——Raymond 一個人去取車，返嚟接大家。", map:"関西国際空港 第1ターミナル" },
+      { at:"09:10", t:"家人喺機場等｜Raymond 去取車",
+        p:"家人搵個有冷氣、有位坐嘅地方等（第1客運大樓有便利店同 café，仲有育嬰室）。Raymond 搭 JR 或南海線去りんくうタウン駅，一個站，6–9 分鐘。",
+        map:"りんくうタウン駅" },
+      { at:"10:00", t:"取車：NICONICO Rent a Car 臨空城站前店",
+        p:"取 8 座位 Vellfire。信用卡付款，唔收現金。要帶香港駕駛執照 + 國際駕駛許可證，兩樣都要。門市電話 072-429-9085。",
+        map:"ニコニコレンタカー りんくうタウン駅前店" },
+      { at:"10:25", t:"揸車返機場接家人",
+        p:"由臨空城過跨海橋返 KIX 約 15 分鐘。喺第1客運大樓落客／接客區接埋家人同行李。過橋要俾過路費，記得 ETC 卡已經租咗。",
+        map:"関西国際空港 第1ターミナル" },
+      { at:"11:00", t:"泉佐野漁協 青空市場",
+        p:"由機場返轉頭過橋，10–15 分鐘就到，順路。呢度係漁協直營魚市場，刺身同海鮮丼夠新鮮，平過黑門市場一大截，遊客少好多。大片免費平地停車場，Vellfire 泊得晒。",
+        map:"泉佐野漁協 青空市場",
+        meal:{ tag:"午餐", txt:"市場內有食堂同海鮮丼舖，即買即食。落機第一餐食新鮮刺身，開個好頭。呢類市場朝早最旺，下午收得早，出發前用地圖睇實營業時間。" } },
+      { at:"12:30", t:"駕車前往民宿放行李",
+        p:"由泉佐野去桃谷車程約 60 分鐘，大約 13:30 到。過咗 11:00 就可以放行李——但記得要事先同 Jumpei 講定。", map:HOME },
+      { at:"14:00", t:"駕車去難波／心齋橋",
+        p:"由桃谷開車入市中心約 20 分鐘。市中心街道窄、車位貴，建議直接泊入難波 Parks 或難波 City 呢類大型自走式停車場，再步行去心齋橋，唔好喺心齋橋筋附近兜車位。",
+        map:"なんばパークス 駐車場",
+        meal:{ tag:"午餐備選", txt:"如果青空市場食得飽，午餐可以跳過。想坐低嘆下就去心齋橋大丸 10 樓「西屋」，百年烏冬火鍋店，有大型榻榻米包廂，BB 可以安全躺低。", find:"大丸心斎橋店 西屋" } },
+      { at:"14:30", t:"心齋橋 PARCO 及 Capcom Store",
+        p:"6 樓是流行文化重鎮：Capcom、吉卜力、哥斯拉、超人，還有大創。之後沿心齋橋筋商店街掃藥妝，累了隨時推 BB 車回商場吹冷氣。",
+        map:"心斎橋PARCO",
+        meal:{ tag:"晚餐", txt:"PARCO 地下 2 樓「心齋橋霓虹食堂」。有串炸、御好燒、拉麵等多個檔口，各人點各人喜歡的。", find:"心斎橋ネオン食堂街" } },
+      { at:"17:00", t:"道頓堀",
+        p:"章魚燒、固力果招牌同人潮，由 PARCO 步行幾分鐘就到。", map:"道頓堀" },
+      { at:"20:00", t:"梅田藍天大廈",
+        p:"空中庭園展望台看夜景。如果大家坐完飛機太累，可以取消——第一日本來就很長。", map:"梅田スカイビル 空中庭園展望台" }
+    ]
+  },
+  {
+    n:2, date:"2026-08-06", label:"8月6日（四）", title:"日本環球影城",
+    sub:"Justin 的圓夢日——哈利波特及任天堂世界",
+    stops:[
+      { at:"07:15", t:"出發",
+        p:"目標 07:45 到達 USJ。司機先在正門落客區放下長輩、媽咪同小朋友，再自己去官方停車場泊車。",
+        map:"ユニバーサル・スタジオ・ジャパン 駐車場" },
+      { at:"08:00", t:"入園",
+        p:"一入閘就立即用 App 抽哈利波特整理券，或者直接用快速通關券入場。",
+        map:"ユニバーサル・スタジオ・ジャパン" },
+      { at:"10:00", t:"超級任天堂世界及哈利波特園區",
+        p:"7 位成人只有 3 張快速通關券——玩過山車時向職員說 Child Switch，兩批人輪流玩，不需重新排隊，BB 全程有人照顧。",
+        meal:{ tag:"午餐", txt:"活米村「三根掃帚」。點 Great Feast 大餐盤，烤雞同排骨份量夠全家分，可以望住霍格華茲城堡飲奶油啤酒。", find:"三本の箒 ユニバーサル・スタジオ・ジャパン" } },
+      { at:"19:00", t:"環球城市大道晚餐",
+        p:"Hard Rock Cafe 或 Red Lobster，都在園區出口外。兩間都有極大卡座，剛好塞得下一家大小。",
+        map:"ユニバーサル・シティウォーク大阪" }
+    ]
+  },
+  {
+    n:3, date:"2026-08-07", label:"8月7日（五）", title:"大阪城 · 市區",
+    sub:"大阪城 → 木津市場 → 梅田 → 阿倍野",
+    stops:[
+      { at:"09:30", t:"大阪城公園",
+        p:"大車泊「JR 大阪城公園駅前」露天停車場，平地，Vellfire 冇車高問題。全家坐復古小火車直達天守閣，不用在 8 月的太陽下行斜路。",
+        map:"大阪城公園駅前駐車場" },
+      { at:"12:00", t:"大阪木津市場",
+        p:"黑門市場已經變咗遊客區，人多又貴。木津市場係本地人幫襯嘅老市場，同樣有新鮮刺身同海鮮丼，但清靜好多，而且有自己嘅停車場。留意佢主要做朝早生意，中午前後好多舖開始收，想食就早啲去。",
+        map:"大阪木津市場",
+        meal:{ tag:"午餐", txt:"市場內嘅海鮮丼同壽司舖，即場切即場食。如果去到太夜舖頭收晒，就轉去大阪城 Jo-Terrace 嘅「名代千房」大阪燒，空間大，推 BB 車入座無壓力。", find:"千房 JO-TERRACE OSAKA" } },
+      { at:"14:00", t:"大阪站 · 梅田（泊一次車行晒）",
+        p:"泊 Yodobashi 梅田或 Grand Front 停車場，以下全部行得到，唔使再郁架車：<b>Tower Records</b>（CD、黑膠、周邊，梅田最大嗰間喺 NU 茶屋町）、<b>Sanrio 專門店</b>、<b>Yodobashi 梅田</b>（玩具、扭蛋、動漫樓層）、隔籬 LUCUA 嘅 <b>Moomin Shop</b>。",
+        map:"ヨドバシカメラ マルチメディア梅田 駐車場" },
+      { at:"14:30", t:"Tower Records 梅田",
+        p:"日本嘅 Tower Records 仲好旺盛，J-pop、動漫歌、黑膠同限定周邊都齊。梅田最大嗰間喺 NU 茶屋町，由大阪站行過去約 5 分鐘。",
+        map:"タワーレコード 梅田" },
+      { at:"15:30", t:"Sanrio 專門店",
+        p:"Hello Kitty、Kuromi、玉桂狗周邊。梅田一帶有分店，另外阿倍野 Q's Mall 同心齋橋都有——用下面個掣搵最近嗰間。",
+        map:"サンリオ 梅田" },
+      { at:"16:30", t:"Yodobashi 梅田 · Moomin Shop",
+        p:"Yodobashi 嘅玩具同扭蛋樓層大到可以行成個下午，隔籬 LUCUA 就係 Moomin Shop。兩間都喺 Tower Records 同 Sanrio 行得到嘅範圍。",
+        map:"ヨドバシカメラ マルチメディア梅田" },
+      { at:"16:45", t:"エキマルシェ大阪（掃手信）",
+        p:"大阪站<b>桜橋口</b>嘅站內商場，主打食品同手信——洋菓子、和菓子、便當、地道手信集中晒喺呢度。行完 Yodobashi 順路入去掃。開到大約 22:00，所以就算今日趕唔切，第日夜晚返到嚟都仲買到。",
+        map:"エキマルシェ大阪",
+        url:"https://osaka.ekimaru.com/oc/floor", urlLabel:"樓層地圖",
+        meal:{ tag:"呢度都食得", txt:"如果想喺大阪站食飯：R15「北極星」係蛋包飯（オムライス）嘅發源店，1922 年開到而家，8:00–23:00；R10「とんかつさくら亭」炸豬排；R17「麵つるり」冰見烏龍麵同天婦羅。全部開到 22:00–23:00，行完街先食都仲有得食。", find:"北極星 エキマルシェ大阪" } },
+      { at:"17:30", t:"阿倍野 Q's Mall",
+        p:"大車泊商場地下停車場。官方海賊王專門店 Mugiwara Store 就在這裡。",
+        map:"あべのキューズモール" },
+      { at:"19:00", t:"阿倍野 HARUKAS 展望台",
+        p:"離地 300 米，俯瞰整個大阪。",
+        map:"あべのハルカス ハルカス300",
+        meal:{ tag:"晚餐", txt:"HARUKAS 13 樓「莫庫莫庫（Mokumoku）」農場直營自助餐。有機蔬菜同自製香腸，枱面寬敞，長輩吃得清淡，育嬰設施頂級。", find:"モクモク あべのハルカス" } }
+    ]
+  },
+  {
+    n:4, date:"2026-08-08", label:"8月8日（六）", title:"京都自駕",
+    sub:"鐵道博物館 → 清水寺或宇治",
+    stops:[
+      { at:"09:00", t:"駕車前往京都",
+        p:"車程約 1 小時。大車泊「梅小路公園」露天平地停車場。", map:"梅小路公園駐車場" },
+      { at:"10:00", t:"京都鐵道博物館",
+        p:"看真實的新幹線，場地夠大，小朋友可以盡情放電。",
+        map:"京都鉄道博物館",
+        meal:{ tag:"午餐", txt:"博物館旁的「藏壽司」京都南區店，開車 5 分鐘即到，自帶超大停車場。小朋友每食 5 碟可以玩一次扭蛋。", find:"くら寿司 京都南区" } },
+      { at:"14:00", t:"清水寺或宇治",
+        p:"清水寺樓梯多、人也多。宇治地勢平坦、較清靜，而且有抹茶——帶著長輩同 BB 車，在這種天氣下宇治是比較好的選擇。",
+        map:"宇治 平等院" },
+      { at:"18:30", t:"駕車回大阪",
+        meal:{ tag:"晚餐", txt:"大阪市郊的壽喜燒／涮涮鍋專門店「鍋ぞう」或「溫野菜」。全家圍爐吃和牛放題，容易泊車。", find:"鍋ぞう 大阪" } },
+      { at:"20:30", t:"最後購物",
+        p:"回梅田或難波做最後的藥妝同手信採購。", map:"難波 心斎橋筋商店街" }
+    ]
+  },
+  {
+    n:5, date:"2026-08-09", label:"8月9日（日）", title:"臨空城 · 回程",
+    sub:"退房 → Outlet → 關西機場 → 香港",
+    stops:[
+      { at:"10:00", t:"退房",
+        p:"鎖匙放回鎖匙箱，所有行李搬上車——退房後不設行李寄存。" },
+      { at:"11:00", t:"臨空城 Outlet",
+        p:"平地停車場，同還車嘅臨空城站前店行得到。高達模型、名牌童裝、波鞋，最後衝刺。",
+        map:"りんくうプレミアム・アウトレット",
+        meal:{ tag:"午餐", txt:"Outlet 旁的 Rinku Pleasure Town Seacle 美食廣場，或 Outlet 內的藏壽司。快速解決，預留時間清點同磅行李。", find:"りんくうプレジャータウンシークル" } },
+      { at:"15:30", t:"喺 Outlet 執好行李、重新磅過",
+        p:"呢程每人只有 20 公斤寄艙，而且冇獨立手提行李額。上車前分配好，唔好等到櫃檯先發現超重——一上到機場就冇得再執。" },
+      { at:"16:15", t:"揸家人同行李去機場",
+        p:"過跨海橋約 15 分鐘。喺第1客運大樓落客區放低家人同<b>所有行李</b>，佢哋可以入去吹冷氣、慢慢排隊。Raymond 淨係留返自己嘅隨身嘢喺車。",
+        map:"関西国際空港 第1ターミナル" },
+      { at:"16:40", t:"Raymond 揸車去還車",
+        p:"由機場返臨空城約 15 分鐘。行程上加滿油先還車，油站喺臨空城一帶好搵。",
+        map:"ニコニコレンタカー りんくうタウン駅前店" },
+      { at:"17:00", t:"還車：NICONICO 臨空城站前店",
+        p:"預約還車時間就係 17:00，唔好遲。門市電話 072-429-9085。" },
+      { at:"17:15", t:"搭一個站返機場",
+        p:"由りんくうタウン駅搭 JR 或南海線返關西機場，6–9 分鐘，大約 17:35 同家人會合。",
+        map:"関西国際空港 第1ターミナル" },
+      { at:"17:45", t:"一齊辦理登機手續",
+        p:"距離起飛約 3 小時。行李已經喺 Outlet 執好，家人又已經排咗一陣，呢度應該好順。" },
+      { at:"20:40", t:"乘 UO689 回香港",
+        p:"23:50 抵達香港機場第1客運大樓。機上不包餐食，在機場先吃飽。" }
+    ]
+  }
+];
+
+/* ---------- helpers ---------- */
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+                  .replace(/"/g,"&quot;");
+}
+var PIN = '<svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+function stopHTML(s){
+  var h = '<div class="stop"><div class="at num">' + esc(s.at) + '</div><div class="body">' +
+          '<b>' + esc(s.t) + '</b>';
+  if (s.p) h += '<p>' + esc(s.p) + '</p>';
+  if (s.map || s.url){
+    h += '<div class="act">';
+    if (s.map) h += '<a class="btn quiet" href="' + esc(dir(s.map)) + '" target="_blank" rel="noopener">' + PIN + '路線</a>';
+    if (s.url) h += '<a class="btn quiet" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.urlLabel || "官網") + '</a>';
+    h += '</div>';
+  }
+  if (s.meal){
+    h += '<div class="meal"><span class="tag">' + esc(s.meal.tag) + '</span><span>' + esc(s.meal.txt) + '</span>';
+    if (s.meal.find) h += '<div class="act"><a class="btn quiet" href="' + esc(find(s.meal.find)) + '" target="_blank" rel="noopener">' + PIN + '睇地圖</a></div>';
+    h += '</div>';
+  }
+  return h + '</div></div>';
+}
+
+/* ---------- 建議行程（替代方案） ---------- */
+var ALT = [
+  {
+    n:1, date:"2026-08-05", label:"8月5日（三）", title:"抵達 · 早唞",
+    sub:"取車 → 青空市場 → 民宿 → 鶴橋燒肉 → 早瞓",
+    stops:[
+      { at:"02:50", t:"乘 HX616 由香港機場第2客運大樓出發",
+        p:"星期二晚上就要出門。呢班機冇乜得瞓，所以今日刻意唔排嘢。" },
+      { at:"07:55", t:"抵達關西機場",
+        p:"家人喺入境大堂等，Raymond 一個人去取車。", map:"関西国際空港 第1ターミナル" },
+      { at:"10:00", t:"取車，返機場接人",
+        p:"10:25 揸返嚟第1客運大樓接家人同行李。",
+        map:"ニコニコレンタカー りんくうタウン駅前店" },
+      { at:"11:00", t:"泉佐野漁協 青空市場",
+        p:"順路，10 分鐘車程。大片免費平地停車場。",
+        map:"泉佐野漁協 青空市場",
+        meal:{ tag:"午餐", txt:"市場內海鮮丼同刺身，落機第一餐食新鮮嘢。食完就直接返民宿，唔再兜路。" } },
+      { at:"12:30", t:"駕車返民宿",
+        p:"約 60 分鐘，13:30 到。先放行李。", map:HOME },
+      { at:"14:00", t:"民宿休息／附近超市補給",
+        p:"呢個係同原定行程最大分別——<b>今日就到此為止</b>。大家瞓個覺，順便去附近超市或藥妝買定水、零食同嬰兒用品。16:00 正式入住。" },
+      { at:"18:00", t:"鶴橋燒肉街晚飯",
+        p:"由民宿去鶴橋只需 5–10 分鐘車程。鶴橋係大阪出名嘅燒肉同韓國城，平、地道、夠位。行完一日冇乜行街壓力，食完早啲返去瞓。",
+        map:"鶴橋 焼肉街" },
+      { at:"20:30", t:"早瞓",
+        p:"聽日 07:15 就要出發去 USJ。今晚瞓得夠，聽日先頂得順。" }
+    ]
+  },
+  {
+    n:2, date:"2026-08-06", label:"8月6日（四）", title:"環球影城 · 分兩隊",
+    sub:"細路玩足全日，長輩半日就夠",
+    stops:[
+      { at:"07:15", t:"出發",
+        p:"07:45 到 USJ。正門落客區放低人，再去泊車。",
+        map:"ユニバーサル・スタジオ・ジャパン 駐車場" },
+      { at:"08:00", t:"入園",
+        p:"即刻用 App 抽哈利波特／任天堂整理券。3 張快速通關券建議<b>全部畀三個細路</b>——佢哋先係主角，大人排隊頂得順啲。" },
+      { at:"10:00", t:"大人輪流玩，BB 有人照顧",
+        p:"玩機動遊戲時同職員講 Child Switch，兩批人輪流玩，唔使重新排隊。",
+        meal:{ tag:"午餐", txt:"活米村「三根掃帚」，Great Feast 大餐盤夠全家分。中午最熱，喺室內餐廳坐耐啲當避暑。" } },
+      { at:"14:00", t:"公公婆婆提早收工",
+        p:"<b>呢個係建議行程嘅重點。</b>8 月 USJ 三十幾度、人又逼，77 歲全日喺戶外排隊風險太高。Raymond 揸車送兩位長輩返民宿唞，再返嚟同大隊會合——來回約 1 小時。如果長輩自己都覺得攰，甚至可以今日索性唔入園。",
+        map:HOME },
+      { at:"19:00", t:"環球城市大道晚飯",
+        p:"Hard Rock Cafe 或 Red Lobster，大卡座，出閘就到。",
+        map:"ユニバーサル・シティウォーク大阪" }
+    ]
+  },
+  {
+    n:3, date:"2026-08-07", label:"8月7日（五）", title:"京都自駕",
+    sub:"星期五去京都，避開週六人潮",
+    stops:[
+      { at:"09:00", t:"駕車前往京都",
+        p:"<b>由原定嘅星期六調到星期五。</b>8 月嘅京都本身已經爆，再撞正週六就更加難行難泊。車程約 1 小時。",
+        map:"梅小路公園駐車場" },
+      { at:"10:00", t:"京都鐵道博物館",
+        p:"室內、有冷氣、地方大，真嘅新幹線任睇。長輩有位坐，細路放到電——8 月最啱嘅景點之一。",
+        map:"京都鉄道博物館",
+        meal:{ tag:"午餐", txt:"隔籬「藏壽司」京都南區店，開車 5 分鐘，自帶大停車場。開兩張 6 人卡位，每食 5 碟玩一次扭蛋。", find:"くら寿司 京都南区" } },
+      { at:"14:00", t:"宇治（唔建議清水寺）",
+        p:"清水寺要行斜路同石級，人又多，77 歲加 BB 車喺 36 度下好辛苦。宇治平坦、清靜、有抹茶同平等院，同樣夠靚。",
+        map:"宇治 平等院" },
+      { at:"17:30", t:"駕車返大阪",
+        meal:{ tag:"晚餐", txt:"郊區嘅「しゃぶ葉」涮涮鍋放題或「焼肉きんぐ」燒肉放題，自帶免費停車場，唔使入市區搏殺。8 人建議預約。", find:"しゃぶ葉 大阪 駐車場" } }
+    ]
+  },
+  {
+    n:4, date:"2026-08-08", label:"8月8日（六）", title:"大阪城 · 梅田",
+    sub:"只泊兩次車 · Tower Records · Sanrio",
+    stops:[
+      { at:"09:30", t:"大阪城公園",
+        p:"趁朝早未夠曬。泊「JR 大阪城公園駅前」露天平地場，坐復古小火車上天守閣，唔使行斜路。",
+        map:"大阪城公園駅前駐車場",
+        meal:{ tag:"午餐", txt:"Jo-Terrace 內「名代千房」大阪燒，空間大，推 BB 車入座無壓力。", find:"千房 JO-TERRACE OSAKA" } },
+      { at:"14:00", t:"泊梅田，行晒成個下午",
+        p:"<b>呢日只泊兩次車。</b>原定行程一日跑五個地方，8 個人上落車、搵位、去廁所，每次轉場實食 30–45 分鐘。梅田係最抵泊嘅一次——<b>Tower Records、Sanrio、Yodobashi、Moomin Shop</b> 四樣嘢全部喺步行範圍內，泊低就唔使再郁架車。",
+        map:"ヨドバシカメラ マルチメディア梅田 駐車場" },
+      { at:"14:30", t:"Tower Records 梅田",
+        p:"J-pop、動漫歌、黑膠同限定周邊。梅田最大嗰間喺 NU 茶屋町，由大阪站行過去約 5 分鐘。",
+        map:"タワーレコード 梅田" },
+      { at:"15:30", t:"Sanrio 專門店",
+        p:"Hello Kitty、Kuromi、玉桂狗周邊，梅田一帶有分店。",
+        map:"サンリオ 梅田" },
+      { at:"16:30", t:"Yodobashi 梅田 · Moomin Shop",
+        p:"玩具、扭蛋、動漫樓層行到腳軟，隔籬 LUCUA 就係 Moomin Shop。攰就隨時返商場吹冷氣。",
+        map:"ヨドバシカメラ マルチメディア梅田" },
+      { at:"17:45", t:"エキマルシェ大阪（掃手信）",
+        p:"大阪站<b>桜橋口</b>站內商場。值得入嘅有：<b>エキドンキ</b>（G01，Don Quijote 細舖，7:00–23:00，藥妝手信最方便）、<b>浪芳庵</b>（F06，日式糕點手信）、<b>舞昆のこうはら</b>（F14，鹽昆布，長輩啱）、<b>BIO-RAL</b>（F17，天然食品超市）、<b>Pokémon Stand</b>（S04，扭蛋機，細路實鍾意）、<b>大阪關西萬博官方店</b>（F19）。",
+        map:"エキマルシェ大阪",
+        url:"https://osaka.ekimaru.com/oc/floor", urlLabel:"樓層地圖",
+        meal:{ tag:"呢度都食得", txt:"如果想喺大阪站食飯：R15「北極星」係蛋包飯（オムライス）嘅發源店，1922 年開到而家，8:00–23:00；R10「とんかつさくら亭」炸豬排；R17「麵つるり」冰見烏龍麵同天婦羅。全部開到 22:00–23:00，行完街先食都仲有得食。", find:"北極星 エキマルシェ大阪" } },
+      { at:"18:30", t:"晚飯",
+        p:"梅田本身食嘢選擇多，唔想再揸車就喺附近解決；想鬆動啲就揸返出郊區食放題。",
+        meal:{ tag:"想去心齋橋？", txt:"Capcom Store 喺心齋橋 PARCO，唔喺梅田。如果細路一定要去，就將今日下午改成難波 Parks 泊車 → Capcom Store → 心齋橋筋 → 道頓堀，同樣係泊一次車行晒。梅田同心齋橋二揀一，唔好兩邊都去——一日跑兩個購物區，8 個人一定散晒。", find:"心斎橋PARCO" } }
+    ]
+  },
+  {
+    n:5, date:"2026-08-09", label:"8月9日（日）", title:"臨空城 · 回程",
+    sub:"Outlet 縮短，留返時間做緩衝",
+    stops:[
+      { at:"10:00", t:"退房",
+        p:"鎖匙放回鎖匙箱，行李全部上車。" },
+      { at:"11:30", t:"臨空城 Outlet",
+        p:"<b>由 4 個半鐘縮短到 3 個鐘。</b>離境日帶住 BB 同長輩喺 Outlet 耗成個下午太攰，而且遲咗就冇得補救。",
+        map:"りんくうプレミアム・アウトレット",
+        meal:{ tag:"午餐", txt:"Outlet 內或旁邊 Seacle 美食廣場，快速解決。", find:"りんくうプレジャータウンシークル" } },
+      { at:"14:30", t:"執行李、重新磅過",
+        p:"回程每人淨係 20 公斤寄艙，冇獨立手提行李額。喺停車場執好先，唔好等到櫃檯。" },
+      { at:"15:30", t:"緩衝時間",
+        p:"呢個鐘頭係特登留白嘅。塞車、搵唔到嘢、BB 要換片——有咗呢個鐘就唔會失預算。" },
+      { at:"16:15", t:"送家人同行李入機場",
+        p:"喺第1客運大樓落客區放低，佢哋入去吹冷氣、排隊。",
+        map:"関西国際空港 第1ターミナル" },
+      { at:"17:00", t:"還車，再搭一個站返機場",
+        p:"加滿油先還。17:35 同家人會合。",
+        map:"ニコニコレンタカー りんくうタウン駅前店" },
+      { at:"17:45", t:"一齊辦理登機" },
+      { at:"20:40", t:"乘 UO689 回香港",
+        p:"23:50 到香港機場第1客運大樓。機上不包餐食。" }
+    ]
+  }
+];
+
+var PLANS = { orig:DAYS, alt:ALT };
+var planKey = "orig";
+try { planKey = localStorage.getItem("osakaPlan") || "orig"; } catch(e){}
+if (!PLANS[planKey]) planKey = "orig";
+
+var ALT_WHY = [
+  "落機當日唔再排節目。02:50 嘅機瞓唔到，原定行程玩到夜晚 8 點，即係 77 歲同 14 個月大嘅 BB 要連續清醒成日；而聽日 07:15 就要出發去 USJ。",
+  "USJ 分兩隊。8 月三十幾度加暑假人潮，7 個大人得 3 張快速通關券，其餘要喺露天位排一個鐘。長輩玩半日就夠，中途送返民宿唞。",
+  "京都由星期六調去星期五。京都嘅夏天週六係最逼、最難泊車嘅組合，星期五明顯鬆動。",
+  "市區日由五個景點減到兩次泊車。8 個人每次上落車實食 30–45 分鐘，寧願三個地方行得好過五個地方趕住走。",
+  "臨空城由 4.5 個鐘減到 3 個鐘，留返一個鐘做緩衝。離境日最唔想就係趕。"
+];
+
+/* ---------- 分頁 ---------- */
+var tabs = document.querySelectorAll("nav button");
+tabs.forEach(function(b){
+  b.addEventListener("click", function(){
+    tabs.forEach(function(x){ x.setAttribute("aria-selected", String(x === b)); });
+    ["today","fly","stay","plan","tix","book","info"].forEach(function(t){
+      document.getElementById("p-" + t).hidden = (t !== b.dataset.tab);
+    });
+    window.scrollTo(0,0);
+  });
+});
+
+/* ---------- 每日行程 ---------- */
+var todayISO = new Date().toISOString().slice(0,10);
+var daysEl  = document.getElementById("days");
+var noteEl  = document.getElementById("planNote");
+var segEl   = document.getElementById("seg");
+
+function renderDays(){
+  daysEl.innerHTML = "";
+  PLANS[planKey].forEach(function(d){
+    var isNow = (d.date === todayISO);
+    var el = document.createElement("div");
+    el.className = "day";
+    el.innerHTML =
+      '<button class="day-btn" aria-expanded="' + (isNow ? "true" : "false") + '">' +
+        '<span class="dnum">' + d.n + '</span>' +
+        '<span class="dtext"><b>' + esc(d.title) + '</b><span>' + esc(d.label) + ' · ' + esc(d.sub) + '</span></span>' +
+        (isNow ? '<span class="chip live">今日</span>' : '') +
+        '<span class="caret"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>' +
+      '</button>' +
+      '<div class="day-panel"' + (isNow ? "" : " hidden") + '>' + d.stops.map(stopHTML).join("") + '</div>';
+
+    var btn = el.querySelector(".day-btn"), pan = el.querySelector(".day-panel");
+    btn.addEventListener("click", function(){
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      pan.hidden = open;
+    });
+    daysEl.appendChild(el);
+  });
+
+  noteEl.innerHTML = (planKey === "alt")
+    ? '<div class="panel stack" style="margin-bottom:12px">' +
+      '<div><h3>點解要改？</h3><div class="tiny">同一批景點，重新排過先後同鬆緊。8 人同行，兩位 77 歲長輩加一個 14 個月大嘅 BB，8 月又極熱——呢個版本係按呢個組合嚟排。</div></div>' +
+      '<div class="why">' + ALT_WHY.map(function(w,i){
+        return '<div class="item"><span class="mark">' + (i+1) + '</span><span>' + w + '</span></div>';
+      }).join("") + '</div>' +
+      '<div class="call rail"><span class="lead">大方向冇變。</span>機票、民宿、租車、USJ 門票全部照舊，唔使改任何預訂。改嘅只係每日點行。</div>' +
+      '<div class="call"><span class="lead">仲有一個選擇：用奈良換京都。</span>奈良離民宿只係 40 分鐘，地勢平坦，東大寺同小鹿對細路同長輩都啱。京都嘅石級同斜路，係成個行程最考驗兩位長輩嘅地方。想輕鬆啲就值得考慮。</div>' +
+      '</div>'
+    : '<div class="call rail" style="margin-bottom:12px"><span class="lead">呢個係原定版本。</span>想睇按天氣、體力同人潮重新排過嘅版本，㩒上面「建議行程」。</div>';
+}
+
+segEl.addEventListener("click", function(e){
+  var b = e.target.closest("button[data-plan]");
+  if (!b) return;
+  planKey = b.dataset.plan;
+  try { localStorage.setItem("osakaPlan", planKey); } catch(err){}
+  segEl.querySelectorAll("button").forEach(function(x){
+    x.setAttribute("aria-selected", String(x.dataset.plan === planKey));
+  });
+  renderDays();
+  refresh();
+});
+
+segEl.querySelectorAll("button").forEach(function(x){
+  x.setAttribute("aria-selected", String(x.dataset.plan === planKey));
+});
+renderDays();
+
+/* ---------- 狀態列 ---------- */
+var DEPART = new Date("2026-08-05T02:50:00+08:00");
+var LAND   = new Date("2026-08-09T23:50:00+08:00");
+
+function dayGap(a,b){
+  return Math.round((Date.UTC(b.getFullYear(),b.getMonth(),b.getDate()) -
+                     Date.UTC(a.getFullYear(),a.getMonth(),a.getDate())) / 86400000);
+}
+
+function refresh(){
+  var now = new Date(), current = null;
+  PLANS[planKey].forEach(function(d){ if (d.date === todayISO) current = d; });
+
+  var fig = document.getElementById("figure"),
+      b   = document.getElementById("statusB"),
+      s   = document.getElementById("statusS"),
+      box = document.getElementById("todayBox");
+
+  if (now < DEPART){
+    var left = dayGap(now, DEPART);
+    if (left > 1){
+      fig.textContent = left;
+      b.textContent = "日後出發";
+      s.textContent = "HX616 · 8月5日（三）02:50 香港機場第2客運大樓";
+    } else {
+      fig.textContent = "!";
+      b.textContent = "今晚出發";
+      s.textContent = "23:50 前到達香港機場第2客運大樓";
+    }
+  } else if (now > LAND){
+    fig.textContent = "✓";
+    b.textContent = "旅程結束";
+    s.textContent = "希望大家玩得開心";
+  } else if (current){
+    fig.textContent = current.n;
+    b.textContent = current.title;
+    s.textContent = current.label;
+  } else {
+    fig.textContent = "—";
+    b.textContent = "旅途中";
+    s.textContent = "大阪 2026年8月5至9日";
+  }
+
+  if (current){
+    box.innerHTML = '<h2>今日 · ' + esc(current.label) + '</h2>' +
+      '<div class="panel"><h3 style="margin-bottom:8px">' + esc(current.title) + '</h3>' +
+      current.stops.map(stopHTML).join("") + '</div>';
+  } else if (now < DEPART){
+    box.innerHTML =
+      '<h2>出發前準備</h2><div class="panel"><ul>' +
+      '<li>辦理網上登機——去程<b>香港航空</b>，回程<b>香港快運</b>。這是兩張分開的機票。</li>' +
+      '<li>將 KKday 兩封 USJ 憑證電郵下載或截圖，確保離線都看得到。</li>' +
+      '<li>列印或下載 Tabirai 租車確認 PDF，並帶備<b>國際駕駛許可證</b>。</li>' +
+      '<li>因為 07:55 就落機，記得先聯絡 Jumpei 確認可否提早放行李。</li>' +
+      '<li>檢查護照有效期是否有 6 個月以上，姓名與機票完全一致。</li>' +
+      '</ul></div>';
+  } else {
+    box.innerHTML = "";
+  }
+}
+refresh();
+setInterval(refresh, 60000);
+
+/* ---------- 旅遊書 ----------
+   每頁一個 object：{ src: "data:image/jpeg;base64,...", cap: "說明（可選）" }
+   圖片會直接嵌入呢個檔案，所以離線都睇到。 */
+var BOOK = [];
+
+var shelf = document.getElementById("shelf");
+
+function paintShelf(){
+  if (!BOOK.length){
+    shelf.innerHTML =
+      '<div class="empty">' +
+      '<svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 012-2h13v18H6a2 2 0 01-2-1.5z"/><path d="M4 19.5A2 2 0 016 18h13"/></svg>' +
+      '<b>旅遊書仲未加入</b>' +
+      '<span>Raymond 影完旅遊書之後會加入呢度。到時㩒任何一頁就可以放大慢慢睇，離線都得。</span>' +
+      '</div>';
+    return;
+  }
+  shelf.innerHTML = '<div class="shelf">' + BOOK.map(function(p,i){
+    return '<button class="leaf" data-i="' + i + '">' +
+           '<img src="' + p.src + '" alt="旅遊書第 ' + (i+1) + ' 頁" loading="lazy">' +
+           '<span class="no">' + (i+1) + '</span>' +
+           (p.cap ? '<span class="cap">說明</span>' : '') +
+           '</button>';
+  }).join("") + '</div>' +
+  '<div class="call rail" style="margin-top:12px"><span class="lead">㩒任何一頁放大。</span>放大後可以用兩隻手指再 zoom，睇細字冇問題。左右掣揭下一頁。</div>';
+}
+paintShelf();
+
+/* Lightbox */
+var lb      = document.getElementById("lb"),
+    lbStage = document.getElementById("lbStage"),
+    lbCount = document.getElementById("lbCount"),
+    lbCap   = document.getElementById("lbCap"),
+    lbPrev  = document.getElementById("lbPrev"),
+    lbNext  = document.getElementById("lbNext"),
+    lbIdx   = 0,
+    lastFocus = null;
+
+function lbShow(i){
+  lbIdx = i;
+  var p = BOOK[i];
+  lbStage.innerHTML = '<img src="' + p.src + '" alt="旅遊書第 ' + (i+1) + ' 頁">';
+  lbStage.scrollTop = 0;
+  lbCount.textContent = (i+1) + " / " + BOOK.length;
+  lbCap.textContent = p.cap || "";
+  lbPrev.disabled = (i === 0);
+  lbNext.disabled = (i === BOOK.length - 1);
+}
+function lbOpen(i){
+  lastFocus = document.activeElement;
+  lb.hidden = false;
+  document.body.style.overflow = "hidden";
+  lbShow(i);
+  document.getElementById("lbClose").focus();
+}
+function lbHide(){
+  lb.hidden = true;
+  lbStage.innerHTML = "";
+  document.body.style.overflow = "";
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+shelf.addEventListener("click", function(e){
+  var leaf = e.target.closest(".leaf");
+  if (leaf) lbOpen(Number(leaf.dataset.i));
+});
+document.getElementById("lbClose").addEventListener("click", lbHide);
+lbPrev.addEventListener("click", function(){ if (lbIdx > 0) lbShow(lbIdx - 1); });
+lbNext.addEventListener("click", function(){ if (lbIdx < BOOK.length - 1) lbShow(lbIdx + 1); });
+document.addEventListener("keydown", function(e){
+  if (lb.hidden) return;
+  if (e.key === "Escape") lbHide();
+  else if (e.key === "ArrowLeft"  && lbIdx > 0) lbShow(lbIdx - 1);
+  else if (e.key === "ArrowRight" && lbIdx < BOOK.length - 1) lbShow(lbIdx + 1);
+});
+
+/* 左右掃 */
+var swipeX = null;
+lbStage.addEventListener("touchstart", function(e){
+  swipeX = (e.touches.length === 1) ? e.touches[0].clientX : null;
+}, { passive:true });
+lbStage.addEventListener("touchend", function(e){
+  if (swipeX === null) return;
+  var dx = e.changedTouches[0].clientX - swipeX;
+  if (Math.abs(dx) > 60){
+    if (dx > 0 && lbIdx > 0) lbShow(lbIdx - 1);
+    else if (dx < 0 && lbIdx < BOOK.length - 1) lbShow(lbIdx + 1);
+  }
+  swipeX = null;
+}, { passive:true });
+
+/* ---------- 複製 ---------- */
+document.addEventListener("click", function(e){
+  var btn = e.target.closest(".mini");
+  if (!btn || !btn.dataset.copy) return;
+  var ok = function(){
+    var was = btn.textContent;
+    btn.textContent = "已複製";
+    btn.classList.add("done");
+    setTimeout(function(){ btn.textContent = was; btn.classList.remove("done"); }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(btn.dataset.copy).then(ok, function(){});
+  } else {
+    var ta = document.createElement("textarea");
+    ta.value = btn.dataset.copy; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); ok(); } catch(err){}
+    document.body.removeChild(ta);
+  }
+});
+</script>
+
+
+</body>
+</html>
